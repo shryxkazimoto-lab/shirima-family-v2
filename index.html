@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Shirima Family — Fomu ya Usajili wa Vijana wa Shirima"/>
+<title>Shirima Family — Fomu ya Usajili</title>
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+/* ── PAGE ── */
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  background:#EEF4FB;
+  min-height:100vh;
+  padding:1.5rem 1rem 3rem;
+  color:#1a1a2e;
+}
+.container{max-width:700px;margin:0 auto;}
+
+/* ── HEADER ── */
+.page-header{
+  background:#1A56A0;
+  padding:2rem 1.5rem;
+  text-align:center;
+  border-radius:12px 12px 0 0;
+  position:relative;
+  overflow:hidden;
+}
+.hdr-top{position:absolute;top:0;left:0;right:0;height:4px;background:#F07020;}
+.hdr-bot{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(240,112,32,.4);}
+.hdr-c1{position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(255,255,255,.05);border-radius:50%;}
+.hdr-c2{position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;background:rgba(240,112,32,.08);border-radius:50%;}
+.hdr-icon{
+  width:68px;height:68px;
+  background:rgba(240,112,32,.18);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;
+  border:2px solid rgba(240,112,32,.5);
+}
+.hdr-title{color:#fff;font-size:26px;font-weight:700;letter-spacing:.3px;}
+.hdr-sub{color:rgba(255,255,255,.85);font-size:15px;margin-top:5px;}
+.hdr-badge{
+  display:inline-block;
+  background:#F07020;color:#fff;
+  font-size:12px;font-weight:600;
+  padding:5px 18px;border-radius:999px;
+  margin-top:14px;
+}
+
+/* ── FORM CARD ── */
+.form-wrap{
+  background:#fff;
+  border-radius:0 0 12px 12px;
+  border:1px solid #B5D4F4;border-top:none;
+  padding:2rem;
+}
+
+/* ── SECTION LABEL ── */
+.sec-lbl{
+  font-size:11px;font-weight:700;color:#1A56A0;
+  text-transform:uppercase;letter-spacing:.09em;
+  margin:2rem 0 1rem;
+  display:flex;align-items:center;gap:8px;
+}
+.sec-lbl::before{content:'';width:3px;height:14px;background:#F07020;border-radius:2px;flex-shrink:0;}
+.sec-lbl:first-child{margin-top:0;}
+
+/* ── FIELDS ── */
+.fg{margin-bottom:1.2rem;}
+.fl{display:block;font-size:14px;font-weight:500;color:#2a2a3e;margin-bottom:8px;}
+.req{color:#F07020;}
+.opt{font-size:12px;color:#999;font-weight:400;margin-left:4px;}
+.hint{font-size:12px;color:#999;margin-top:5px;line-height:1.5;}
+
+input[type=text],
+input[type=tel],
+input[type=password],
+select{
+  width:100%;height:44px;padding:0 14px;
+  border-radius:8px;
+  border:1px solid #ccd9ea;
+  background:#fff;color:#1a1a2e;
+  font-size:14px;font-family:inherit;
+  transition:border-color .15s,box-shadow .15s;
+  -webkit-appearance:none;appearance:none;
+}
+input:focus,select:focus{
+  outline:none;border-color:#1A56A0;
+  box-shadow:0 0 0 3px rgba(26,86,160,.12);
+}
+input.err{border-color:#F07020!important;box-shadow:0 0 0 3px rgba(240,112,32,.12)!important;}
+input.good{border-color:#3a9922;}
+input:disabled{background:#f5f7fb;color:#999;cursor:not-allowed;}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231A56A0' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:38px;
+}
+
+/* ── ALERTS ── */
+.ab{
+  display:none;
+  background:#FEF0E6;border:1px solid #F59040;border-left:3px solid #F07020;
+  border-radius:8px;padding:9px 13px;margin-top:8px;
+  font-size:13px;color:#B85010;line-height:1.5;
+}
+.ab.show{display:block;}
+
+/* ── CHECKBOX ── */
+.cb-row{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 15px;
+  background:#E6F0FB;border:1px solid #B5D4F4;
+  border-radius:8px;cursor:pointer;user-select:none;margin-top:6px;
+}
+.cb-row input[type=checkbox]{width:18px;height:18px;accent-color:#1A56A0;cursor:pointer;flex-shrink:0;}
+.cb-row label{font-size:13px;color:#0D3A72;cursor:pointer;line-height:1.4;}
+
+/* ── RADIO ── */
+.rg{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
+.ro{
+  display:flex;align-items:center;gap:7px;
+  padding:10px 18px;
+  border:1px solid #ccd9ea;border-radius:999px;
+  cursor:pointer;font-size:13px;color:#555;
+  transition:all .15s;user-select:none;
+}
+.ro input{display:none;}
+.ro.sel{background:#E6F0FB;border-color:#1A56A0;color:#0D3A72;font-weight:600;}
+.ro:hover{border-color:#1A56A0;color:#1A56A0;}
+
+/* ── SUBMIT BUTTON ── */
+.sbtn{
+  width:100%;height:50px;
+  background:#1A56A0;color:#fff;
+  border:none;border-radius:8px;
+  font-size:15px;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:1.75rem;font-family:inherit;
+  transition:background .15s,transform .1s;
+  position:relative;overflow:hidden;
+}
+.sbtn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:#F07020;}
+.sbtn:hover{background:#0D3A72;}
+.sbtn:active{transform:scale(.98);}
+.sbtn:disabled{background:#999;cursor:not-allowed;}
+
+/* ── SPINNER ── */
+.spin{
+  display:inline-block;width:17px;height:17px;
+  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;
+  border-radius:50%;animation:sp .7s linear infinite;
+}
+@keyframes sp{to{transform:rotate(360deg);}}
+
+/* ── TOASTS ── */
+.toast-ok{
+  display:none;
+  background:#E6F7ED;border:1px solid #6fcf97;border-left:3px solid #27ae60;
+  border-radius:8px;padding:12px 15px;margin-bottom:1.25rem;
+  font-size:14px;color:#1a6b3a;font-weight:500;line-height:1.5;
+}
+.toast-err{
+  display:none;
+  background:#FEF0E6;border:1px solid #F59040;border-left:3px solid #F07020;
+  border-radius:8px;padding:12px 15px;margin-bottom:1.25rem;
+  font-size:14px;color:#B85010;line-height:1.5;
+}
+
+/* ── ADMIN ── */
+.adm-wrap{margin-top:1.75rem;text-align:center;}
+.adm-btn{
+  background:transparent;border:1px solid #1A56A0;color:#1A56A0;
+  border-radius:8px;padding:10px 28px;font-size:14px;font-weight:500;
+  cursor:pointer;font-family:inherit;transition:all .15s;
+}
+.adm-btn:hover{background:#1A56A0;color:#fff;}
+
+/* ── PIN BOX ── */
+.pin-box{
+  background:#fff;border:1px solid #B5D4F4;border-radius:12px;
+  padding:1.5rem;max-width:380px;margin:1rem auto 0;text-align:center;
+}
+.pin-icon{font-size:32px;margin-bottom:8px;}
+.pin-title{font-size:16px;font-weight:600;color:#0D3A72;}
+.pin-sub{font-size:13px;color:#888;margin-top:4px;margin-bottom:14px;}
+.pin-inp{
+  width:100%;height:48px;border-radius:8px;
+  border:1px solid #ccd9ea;font-size:20px;
+  text-align:center;letter-spacing:.35em;
+  font-family:inherit;padding:0 16px;margin-bottom:10px;
+}
+.pin-inp:focus{outline:none;border-color:#1A56A0;box-shadow:0 0 0 3px rgba(26,86,160,.12);}
+
+/* ── DATABASE PANEL ── */
+.db-box{
+  margin-top:1rem;border-radius:12px;
+  border:1px solid #B5D4F4;overflow:hidden;
+}
+.db-hdr{
+  background:#0D3A72;padding:14px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:8px;position:relative;
+}
+.db-hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:#F07020;opacity:.7;}
+.db-hdr-l{color:#fff;font-size:14px;font-weight:600;}
+.btn-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.cnt-badge{
+  background:rgba(240,112,32,.2);color:#F59040;
+  font-size:12px;padding:3px 11px;border-radius:999px;
+  border:1px solid rgba(240,112,32,.4);
+}
+.csv-btn{
+  background:#F07020;color:#fff;border:none;
+  border-radius:6px;padding:6px 14px;font-size:12px;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:background .15s;
+}
+.csv-btn:hover{background:#B85010;}
+.csv-btn:disabled{background:#999;cursor:not-allowed;}
+.logout-btn{
+  background:#444;color:#fff;border:none;
+  border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;
+  cursor:pointer;font-family:inherit;
+}
+.logout-btn:hover{background:#222;}
+
+.db-empty{padding:3rem;text-align:center;color:#999;font-size:14px;}
+.db-scroll{overflow-x:auto;}
+.db-table{width:100%;border-collapse:collapse;font-size:12px;}
+.db-table th{
+  background:#E6F0FB;padding:10px 11px;text-align:left;
+  font-weight:600;color:#0D3A72;
+  border-bottom:1px solid #B5D4F4;white-space:nowrap;
+}
+.db-table td{padding:9px 11px;border-bottom:1px solid #eef3fb;vertical-align:middle;}
+.db-table tr:last-child td{border-bottom:none;}
+.db-table tr:hover td{background:#f7faff;}
+
+.av{
+  width:30px;height:30px;border-radius:50%;
+  background:#E6F0FB;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#0D3A72;
+  margin-right:7px;vertical-align:middle;flex-shrink:0;
+}
+.pill-m{background:#E6F0FB;color:#0D3A72;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:600;white-space:nowrap;}
+.pill-u{background:#f0f0f0;color:#666;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:600;white-space:nowrap;}
+.del-btn{background:none;border:none;cursor:pointer;color:#F07020;font-size:16px;padding:3px 6px;border-radius:5px;}
+.del-btn:hover{background:#FEF0E6;}
+
+/* ── FOOTER ── */
+.footer{text-align:center;margin-top:2rem;font-size:12px;color:#aaa;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:520px){
+  body{padding:1rem .5rem 2rem;}
+  .form-wrap{padding:1.25rem;}
+  .ro{padding:9px 14px;font-size:12px;}
+  .db-table th,.db-table td{font-size:11px;padding:7px 8px;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════
+     ⚙️  WEKA URL YAKO HAPA baada ya deploy Apps Script
+     ═══════════════════════════════════════════════════ -->
+<script>
+  var SCRIPT_URL  = "WEKA_URL_YAKO_HAPA";
+  // Mfano: "https://script.google.com/macros/s/AKfycbwITP5QnIqEBU7Q39ydP9z3F-mwf9aB1jKkYo10nRKoOj1nMwhAFenQ-MAmTW16QxoChQ/exec"
+
+  var ADMIN_PIN   = "0658";
+  // Badilisha PIN hii — au iwe sawa na ile kwenye Apps Script
+</script>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="hdr-top"></div><div class="hdr-c1"></div><div class="hdr-c2"></div>
+  <div class="hdr-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"
+      fill="none" stroke="#F59040" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  </div>
+  <div class="hdr-title">Shirima Family</div>
+  <div class="hdr-sub">Vijana wa Shirima</div>
+  <div class="hdr-badge">Fomu ya Usajili wa Wanakikundi</div>
+  <div class="hdr-bot"></div>
+</div>
+
+<!-- FORM -->
+<div class="form-wrap">
+  <div id="tok" class="toast-ok"></div>
+  <div id="ter" class="toast-err"></div>
+
+  <!-- Taarifa za Kibinafsi -->
+  <div class="sec-lbl">Taarifa za Kibinafsi</div>
+
+  <div class="fg">
+    <label class="fl" for="jina">Jina Kamili la Kijana <span class="req">*</span></label>
+    <input type="text" id="jina" placeholder="Mfano: Juma Shirima" autocomplete="off"/>
+    <div class="ab" id="ab-jina"></div>
+  </div>
+
+  <div class="fg">
+    <label class="fl" for="familia">Familia Anayotoka <span class="req">*</span></label>
+    <input type="text" id="familia" placeholder="Jina maarufu la Baba / Mama / Babu / Bibi" autocomplete="off"/>
+    <div class="hint">Mfano: Familia ya Shirima Juma</div>
+    <div class="ab" id="ab-familia"></div>
+  </div>
+
+  <!-- Mawasiliano -->
+  <div class="sec-lbl">Mawasiliano</div>
+
+  <div class="fg">
+    <label class="fl" for="simu">Namba ya Simu <span class="req">*</span></label>
+    <input type="tel" id="simu" placeholder="+255 7XX XXX XXX" autocomplete="off"/>
+    <div class="ab" id="ab-simu"></div>
+  </div>
+
+  <div class="cb-row">
+    <input type="checkbox" id="swa"/>
+    <label for="swa">Namba ya WhatsApp ni sawa na namba ya simu</label>
+  </div>
+
+  <div class="fg" id="wa-f" style="margin-top:1rem;">
+    <label class="fl" for="wa">Namba ya WhatsApp <span class="opt">(si lazima)</span></label>
+    <input type="tel" id="wa" placeholder="+255 7XX XXX XXX" autocomplete="off"/>
+    <div class="ab" id="ab-wa"></div>
+  </div>
+
+  <!-- Hali ya Ndoa -->
+  <div class="sec-lbl">Hali ya Ndoa</div>
+
+  <div class="fg">
+    <div class="fl">Hali ya Ndoa ya Sasa <span class="req">*</span></div>
+    <div class="rg">
+      <label class="ro" data-val="Ameoa"><input type="radio" name="hali" value="Ameoa"/> Ameoa</label>
+      <label class="ro" data-val="Ameolewa"><input type="radio" name="hali" value="Ameolewa"/> Ameolewa</label>
+      <label class="ro" data-val="Hajaoa"><input type="radio" name="hali" value="Hajaoa"/> Hajaoa</label>
+      <label class="ro" data-val="Hajaolewa"><input type="radio" name="hali" value="Hajaolewa"/> Hajaolewa</label>
+    </div>
+    <div class="ab" id="ab-hali"></div>
+  </div>
+
+  <div class="fg" id="mw-f" style="display:none;">
+    <label class="fl" for="mwenza">Jina la Mwenza <span class="req">*</span></label>
+    <input type="text" id="mwenza" placeholder="Jina kamili la mume/mke" autocomplete="off"/>
+    <div class="ab" id="ab-mwenza"></div>
+  </div>
+
+  <!-- Makazi -->
+  <div class="sec-lbl">Makazi</div>
+
+  <div class="fg">
+    <label class="fl" for="mkoa">Mkoa Anaoishi <span class="req">*</span></label>
+    <select id="mkoa">
+      <option value="">-- Chagua Mkoa --</option>
+      <option>Arusha</option><option>Dar es Salaam</option><option>Dodoma</option>
+      <option>Geita</option><option>Iringa</option><option>Kagera</option>
+      <option>Katavi</option><option>Kigoma</option><option>Kilimanjaro</option>
+      <option>Lindi</option><option>Manyara</option><option>Mara</option>
+      <option>Mbeya</option><option>Morogoro</option><option>Mtwara</option>
+      <option>Mwanza</option><option>Njombe</option><option>Pemba Kaskazini</option>
+      <option>Pemba Kusini</option><option>Pwani</option><option>Rukwa</option>
+      <option>Ruvuma</option><option>Shinyanga</option><option>Simiyu</option>
+      <option>Singida</option><option>Songwe</option><option>Tabora</option>
+      <option>Tanga</option><option>Unguja Kaskazini</option><option>Unguja Kusini</option>
+      <option>Mjini Magharibi</option><option>Nje ya Tanzania</option>
+    </select>
+    <div class="ab" id="ab-mkoa"></div>
+  </div>
+
+  <button class="sbtn" id="sbtn" onclick="hifadhi()">Hifadhi Taarifa</button>
+</div>
+
+<!-- ADMIN TOGGLE -->
+<div class="adm-wrap">
+  <button class="adm-btn" onclick="toggleAdm()">📊 Angalia Database ya Wanakikundi</button>
+</div>
+
+<!-- PIN LOGIN -->
+<div id="pin-sec" style="display:none;">
+  <div class="pin-box">
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Ingia kama Msimamizi</div>
+    <div class="pin-sub">Weka PIN yako ya siri</div>
+    <input type="password" class="pin-inp" id="pin"
+      placeholder="● ● ● ● ● ●" autocomplete="off"
+      onkeydown="if(event.key==='Enter') loginAdm()"/>
+    <div class="ab" id="ab-pin" style="text-align:left;"></div>
+    <button class="sbtn" onclick="loginAdm()" style="margin-top:12px;" id="pin-btn">Ingia →</button>
+  </div>
+</div>
+
+<!-- DATABASE PANEL -->
+<div id="adm-panel" class="db-box" style="display:none;margin-top:1rem;">
+  <div class="db-hdr">
+    <div class="db-hdr-l">Database — Wanakikundi Waliosajiliwa</div>
+    <div class="btn-row">
+      <span class="cnt-badge" id="cnt">0 wanachama</span>
+      <button class="csv-btn" id="csv-btn" onclick="exportCSV()">⬇ Pakua CSV</button>
+      <button class="logout-btn" onclick="logoutAdm()">✕ Toka</button>
+    </div>
+  </div>
+  <div id="db-body"><div class="db-empty">Inapakia...</div></div>
+</div>
+
+<div class="footer">Shirima Family &copy; 2025 — Powered by Google Sheets</div>
+
+</div><!-- /container -->
+
+<script>
+/* ════════════════════════════════════════════════
+   GLOBALS
+   ════════════════════════════════════════════════ */
+var isReady = SCRIPT_URL && SCRIPT_URL !== "WEKA_URL_YAKO_HAPA";
+var admOpen = false;
+var curPin  = '';
+var _cbN    = 0;
+var _dt     = {};
+
+/* ════════════════════════════════════════════════
+   HELPERS
+   ════════════════════════════════════════════════ */
+function g(id){ return document.getElementById(id); }
+
+function ini(n){
+  return (n||'').trim().split(' ').slice(0,2)
+    .map(function(w){ return (w[0]||'').toUpperCase(); }).join('');
+}
+
+function esc(s){
+  return String(s==null?'':s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function normP(v){ return (v||'').replace(/[\s\-\(\)]/g,''); }
+
+function showA(id, msg){
+  var b = g('ab-'+id); if(!b) return;
+  b.textContent = msg; b.classList.add('show');
+  var inp = g(id);
+  if(inp && inp.tagName==='INPUT') inp.classList.add('err');
+}
+function hideA(id){
+  var b = g('ab-'+id); if(b) b.classList.remove('show');
+  var inp = g(id);
+  if(inp && inp.tagName==='INPUT') inp.classList.remove('err','good');
+}
+function markOk(id){
+  var inp = g(id);
+  if(inp && inp.tagName==='INPUT'){ inp.classList.remove('err'); inp.classList.add('good'); }
+}
+
+function toast(type, msg){
+  var el = g(type==='ok' ? 'tok' : 'ter');
+  el.textContent = msg; el.style.display = 'block';
+  setTimeout(function(){ el.style.display='none'; }, 5000);
+}
+
+/* ════════════════════════════════════════════════
+   JSONP — the only way to do cross-origin GET
+   from GitHub Pages to Google Apps Script
+   ════════════════════════════════════════════════ */
+function jsonp(url, cb){
+  var name = '__cb' + (_cbN++);
+  var done = false;
+  window[name] = function(data){
+    if(done) return; done = true;
+    try{ document.head.removeChild(s); }catch(e){}
+    delete window[name];
+    cb(null, data);
+  };
+  var s = document.createElement('script');
+  s.onerror = function(){
+    if(done) return; done = true;
+    try{ document.head.removeChild(s); }catch(e){}
+    delete window[name];
+    cb(new Error('Network error'));
+  };
+  s.src = url + (url.indexOf('?')>=0 ? '&' : '?') + 'callback=' + name;
+  document.head.appendChild(s);
+}
+
+/* ════════════════════════════════════════════════
+   FORM — EVENT LISTENERS
+   ════════════════════════════════════════════════ */
+
+/* same-wa checkbox */
+g('swa').addEventListener('change', function(){
+  var wa = g('wa');
+  if(this.checked){
+    wa.value = g('simu').value;
+    wa.disabled = true;
+    g('wa-f').style.opacity = '.55';
+    hideA('wa');
+  } else {
+    wa.disabled = false;
+    wa.value = '';
+    g('wa-f').style.opacity = '1';
+  }
+});
+
+/* simu input */
+g('simu').addEventListener('input', function(){
+  if(g('swa').checked) g('wa').value = this.value;
+  var v = this.value.trim();
+  if(v.length >= 9) liveDupe('simu', v, 'simu');
+  else hideA('simu');
+  if(v) markOk('simu');
+});
+
+/* whatsapp input */
+g('wa').addEventListener('input', function(){
+  var v = this.value.trim();
+  if(v.length >= 9) liveDupe('wa', v, 'whatsapp');
+  else hideA('wa');
+});
+
+/* jina & familia */
+['jina','familia'].forEach(function(id){
+  g(id).addEventListener('input', function(){
+    var v = this.value.trim();
+    if(!v){ hideA(id); return; }
+    if(id==='jina') liveDupe('jina', v, 'jina');
+    else hideA(id);
+    if(v) markOk(id);
+  });
+});
+
+/* mkoa */
+g('mkoa').addEventListener('change', function(){
+  if(this.value) hideA('mkoa');
+});
+
+/* mwenza */
+g('mwenza').addEventListener('input', function(){
+  if(this.value.trim()) hideA('mwenza');
+});
+
+/* radio buttons */
+document.querySelectorAll('.ro').forEach(function(opt){
+  opt.addEventListener('click', function(){
+    document.querySelectorAll('.ro').forEach(function(o){ o.classList.remove('sel'); });
+    this.classList.add('sel');
+    this.querySelector('input').checked = true;
+    hideA('hali');
+    var needs = this.dataset.val==='Ameoa' || this.dataset.val==='Ameolewa';
+    g('mw-f').style.display = needs ? 'block' : 'none';
+    if(!needs){ g('mwenza').value = ''; hideA('mwenza'); }
+  });
+});
+
+/* ════════════════════════════════════════════════
+   LIVE DUPLICATE CHECK
+   ════════════════════════════════════════════════ */
+function liveDupe(elemId, value, field){
+  if(!isReady) return;
+  clearTimeout(_dt[elemId]);
+  _dt[elemId] = setTimeout(function(){
+    var url = SCRIPT_URL + '?action=check&field=' + field + '&value=' + encodeURIComponent(value);
+    jsonp(url, function(err, d){
+      if(err || !d) return;
+      if(d.duplicate){
+        var msgs = {
+          jina:     'Jina hili lipo tayari kwenye database!',
+          simu:     'Namba hii ya simu imesajiliwa tayari!',
+          whatsapp: 'Namba hii ya WhatsApp imesajiliwa tayari!'
+        };
+        showA(elemId, '⚠ ' + (msgs[field] || 'Ipo tayari!'));
+      } else {
+        hideA(elemId);
+        markOk(elemId);
+      }
+    });
+  }, 650);
+}
+
+/* ════════════════════════════════════════════════
+   SUBMIT — REGISTER NEW MEMBER
+   ════════════════════════════════════════════════ */
+function hifadhi(){
+  var jina    = g('jina').value.trim();
+  var familia = g('familia').value.trim();
+  var simu    = g('simu').value.trim();
+  var sameWA  = g('swa').checked;
+  var wa      = sameWA ? simu : g('wa').value.trim();
+  var hali    = document.querySelector('input[name="hali"]:checked');
+  var haliV   = hali ? hali.value : '';
+  var needsMw = haliV==='Ameoa' || haliV==='Ameolewa';
+  var mwenza  = g('mwenza').value.trim();
+  var mkoa    = g('mkoa').value;
+  var ok      = true;
+
+  if(!jina)           { showA('jina',    'Jina la kijana haliwezi kuwa wazi'); ok=false; } else hideA('jina');
+  if(!familia)        { showA('familia', 'Taja familia anayotoka');             ok=false; } else hideA('familia');
+  if(!simu)           { showA('simu',    'Namba ya simu inahitajika');          ok=false; } else hideA('simu');
+  if(!hali)           { showA('hali',    'Tafadhali chagua hali ya ndoa');      ok=false; } else hideA('hali');
+  if(needsMw&&!mwenza){ showA('mwenza',  'Jina la mwenza linahitajika');        ok=false; } else hideA('mwenza');
+  if(!mkoa)           { showA('mkoa',    'Tafadhali chagua mkoa');              ok=false; } else hideA('mkoa');
+  if(!ok) return;
+
+  if(!isReady){
+    toast('err', '⚙️ Weka SCRIPT_URL kwanza ndani ya index.html');
+    return;
+  }
+
+  /* Disable submit */
+  var btn = g('sbtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Inahifadhi...';
+
+  var payload = {
+    jina: jina, familia: familia, simu: simu,
+    whatsapp: wa || null,
+    waIsSameAsSimu: sameWA,
+    hali: haliV,
+    mwenza: needsMw ? mwenza : null,
+    mkoa: mkoa
+  };
+
+  /* POST via no-cors, then verify via JSONP check */
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(){
+    /* Verify after 2s by checking if name now exists */
+    setTimeout(function(){
+      var url = SCRIPT_URL + '?action=check&field=jina&value=' + encodeURIComponent(jina);
+      jsonp(url, function(err, d){
+        btn.disabled = false;
+        btn.innerHTML = 'Hifadhi Taarifa';
+        if(!err && d && d.duplicate){
+          toast('ok', '✅ ' + jina + ' amesajiliwa kikamilifu! Data ipo kwenye Google Sheet.');
+          clearForm();
+          if(g('adm-panel').style.display !== 'none') loadDB();
+        } else {
+          toast('err', '❌ Hitilafu: data haijahifadhiwa. Angalia SCRIPT_URL na Apps Script.');
+        }
+      });
+    }, 2200);
+  }).catch(function(){
+    btn.disabled = false;
+    btn.innerHTML = 'Hifadhi Taarifa';
+    toast('err', '❌ Hitilafu ya mtandao. Hakikisha uko mtandaoni.');
+  });
+}
+
+function clearForm(){
+  ['jina','familia','simu','mwenza'].forEach(function(id){
+    g(id).value=''; g(id).classList.remove('good','err'); hideA(id);
+  });
+  g('wa').value=''; g('wa').disabled=false;
+  g('wa').classList.remove('good','err'); hideA('wa');
+  g('swa').checked=false; g('wa-f').style.opacity='1';
+  g('mkoa').value='';
+  document.querySelectorAll('.ro').forEach(function(o){ o.classList.remove('sel'); });
+  document.querySelectorAll('input[name="hali"]').forEach(function(r){ r.checked=false; });
+  g('mw-f').style.display='none';
+  ['hali','mkoa'].forEach(function(id){ hideA(id); });
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN — LOGIN / LOGOUT
+   ════════════════════════════════════════════════ */
+function toggleAdm(){
+  admOpen = !admOpen;
+  g('pin-sec').style.display = admOpen ? 'block' : 'none';
+  if(!admOpen){ g('adm-panel').style.display='none'; curPin=''; }
+}
+
+function loginAdm(){
+  var pin = g('pin').value.trim();
+  if(!pin){ showA('pin','Weka PIN ya Msimamizi'); return; }
+
+  /* Check PIN locally (it's in the JS file — sufficient for this use case) */
+  if(pin !== ADMIN_PIN){
+    showA('pin','❌ PIN si sahihi. Jaribu tena.');
+    g('pin').value='';
+    return;
+  }
+
+  hideA('pin');
+  curPin = pin;
+  g('adm-panel').style.display = 'block';
+  loadDB();
+}
+
+function logoutAdm(){
+  curPin = '';
+  g('adm-panel').style.display = 'none';
+  g('pin-sec').style.display = 'none';
+  g('pin').value = '';
+  admOpen = false;
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN — LOAD DATABASE
+   ════════════════════════════════════════════════ */
+function loadDB(){
+  if(!isReady){ g('db-body').innerHTML='<div class="db-empty">Weka SCRIPT_URL kwanza.</div>'; return; }
+  g('db-body').innerHTML = '<div class="db-empty">⏳ Inapakia...</div>';
+  var url = SCRIPT_URL + '?action=read&pin=' + encodeURIComponent(curPin);
+  jsonp(url, function(err, d){
+    if(err || !d){ g('db-body').innerHTML='<div class="db-empty">❌ Hitilafu ya kupakia. Jaribu tena.</div>'; return; }
+    if(d.status==='error'){ g('db-body').innerHTML='<div class="db-empty">❌ '+esc(d.message)+'</div>'; return; }
+    renderDB(d.wanakikundi || []);
+  });
+}
+
+function renderDB(recs){
+  g('cnt').textContent = recs.length + ' wanachama';
+  if(!recs.length){
+    g('db-body').innerHTML = '<div class="db-empty">Hakuna taarifa bado. Sajili mwanakikundi wa kwanza!</div>';
+    return;
+  }
+  var rows = recs.map(function(r){
+    var m = r.hali==='Ameoa' || r.hali==='Ameolewa';
+    var rid = esc(r.id);
+    var rjina = esc(r.jina);
+    return '<tr>'
+      +'<td style="white-space:nowrap;"><span class="av">'+ini(r.jina)+'</span>'+rjina+'</td>'
+      +'<td>'+esc(r.familia)+'</td>'
+      +'<td style="font-size:11px;white-space:nowrap;">'+esc(r.simu)+'</td>'
+      +'<td style="font-size:11px;">'+esc(r.whatsapp||'—')+(r.waSawaSimu==='Ndiyo'?'<br><span style="color:#1A56A0;font-size:10px;">✓ sawa na simu</span>':'')+'</td>'
+      +'<td><span class="'+(m?'pill-m':'pill-u')+'">'+esc(r.hali)+'</span></td>'
+      +'<td style="font-size:11px;">'+esc(r.mwenza||'—')+'</td>'
+      +'<td style="font-size:11px;">'+esc(r.mkoa)+'</td>'
+      +'<td style="font-size:11px;color:#999;white-space:nowrap;">'+esc(r.created_at)+'</td>'
+      +'<td><button class="del-btn" onclick="futa(\''+rid+'\',\''+rjina.replace(/\\/g,'\\\\').replace(/'/g,'\\\'')+'\')" title="Futa">🗑</button></td>'
+      +'</tr>';
+  }).join('');
+  g('db-body').innerHTML =
+    '<div class="db-scroll"><table class="db-table"><thead><tr>'
+    +'<th>Jina</th><th>Familia</th><th>Simu</th><th>WhatsApp</th>'
+    +'<th>Hali ya Ndoa</th><th>Mwenza</th><th>Mkoa</th><th>Tarehe</th><th></th>'
+    +'</tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN — DELETE
+   ════════════════════════════════════════════════ */
+function futa(id, jina){
+  if(!confirm('Futa rekodi ya "'+jina+'"?\nHii haiwezi kutenduliwa.')) return;
+  var url = SCRIPT_URL+'?action=delete&id='+encodeURIComponent(id)+'&pin='+encodeURIComponent(curPin);
+  jsonp(url, function(err, d){
+    if(err || !d){ toast('err','❌ Hitilafu ya kufuta.'); return; }
+    if(d.status==='ok'){ toast('ok','✅ Rekodi ya "'+jina+'" imefutwa.'); loadDB(); }
+    else toast('err','❌ '+(d.message||'Hitilafu ya kufuta.'));
+  });
+}
+
+/* ════════════════════════════════════════════════
+   ADMIN — EXPORT CSV
+   ════════════════════════════════════════════════ */
+function exportCSV(){
+  if(!curPin){ toast('err','Ingia kwanza.'); return; }
+  var btn = g('csv-btn');
+  btn.textContent='⏳ Inapakia...'; btn.disabled=true;
+
+  var url = SCRIPT_URL+'?action=export&pin='+encodeURIComponent(curPin);
+  jsonp(url, function(err, d){
+    btn.textContent='⬇ Pakua CSV'; btn.disabled=false;
+    if(err || !d){ toast('err','❌ Hitilafu ya export.'); return; }
+    if(d.status==='error'){ toast('err','❌ '+d.message); return; }
+
+    /* Build CSV from rows array returned by Apps Script */
+    var rows = d.rows || [];
+    if(!rows.length){ toast('err','Hakuna data ya kupakua.'); return; }
+
+    var csv = '\uFEFF'; /* UTF-8 BOM for Excel */
+    rows.forEach(function(row){
+      csv += row.map(function(cell){
+        return '"'+String(cell==null?'':cell).replace(/"/g,'""')+'"';
+      }).join(',') + '\n';
+    });
+
+    var blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    var url2 = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    var date = new Date().toISOString().slice(0,10);
+    a.href = url2;
+    a.download = 'shirima-family-' + date + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url2);
+    toast('ok', '✅ CSV imepakiwa! shirima-family-' + date + '.csv');
+  });
+}
+</script>
+</body>
+</html>
